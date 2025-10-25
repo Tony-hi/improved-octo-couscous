@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>番茄时钟 - 液态玻璃效果</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+        <div class="app-container">
+            <!-- 侧菜单栏 -->
+            <nav class="side-nav">
+                <button class="nav-item active" data-target="timer-section">
+                    <i class="fa fa-clock-o"></i>
+                    <span>番茄钟</span>
+                </button>
+                <button class="nav-item" data-target="task-section">
+                    <i class="fa fa-book"></i>
+                    <span>作业登记</span>
+                </button>
+                <button class="nav-item" data-target="settings-section">
+                    <i class="fa fa-cog"></i>
+                    <span>设置</span>
+                </button>
+            </nav>
+            
+            <!-- 内容区域 -->
+            <main class="main-content">
+                <!-- 番茄钟区域 -->
+                <section id="timer-section" class="app-section active">
+                    <div class="glass-container">
+                        <div class="clock-container">
+                            <h1 class="title">番茄时钟</h1>
+                            
+                            <div class="timer-display">
+                                <div class="time-circle">
+                                    <svg class="progress-ring" width="250" height="250">
+                                        <circle class="progress-ring-bg" cx="125" cy="125" r="115" />
+                                        <circle class="progress-ring-circle" cx="125" cy="125" r="115" stroke-dasharray="722.57" stroke-dashoffset="0" />
+                                    </svg>
+                                    <div class="time-text">
+                                        <span id="minutes">25</span>
+                                        <span class="colon">:</span>
+                                        <span id="seconds">00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="session-info">
+                                <span id="session-status" class="status-pomodoro">专注模式</span>
+                            </div>
+                            
+                            <div class="controls">
+                                <button id="start-btn" class="control-btn primary">
+                                    <i class="fas fa-play"></i> 开始
+                                </button>
+                                <button id="pause-btn" class="control-btn" disabled>
+                                    <i class="fas fa-pause"></i> 暂停
+                                </button>
+                                <button id="reset-btn" class="control-btn">
+                                    <i class="fas fa-redo-alt"></i> 重置
+                                </button>
+                            </div>
+                            
+                            <div class="session-selector">
+                                <button data-time="25" class="session-btn active">25分钟</button>
+                                <button data-time="5" class="session-btn">5分钟</button>
+                                <button data-time="10" class="session-btn">10分钟</button>
+                            </div>
+                            
+                            <div class="stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">今日完成</span>
+                                    <span id="completed-count" class="stat-value">0</span>
+                                    <span class="stat-unit">个番茄</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 设置区域 -->
+                <section id="settings-section" class="app-section">
+                    <div class="glass-container settings-panel">
+                        <h3><i class="fa fa-cog"></i> 设置</h3>
+                        <div class="setting-item">
+                            <label for="auto-start-break">自动开始休息</label>
+                            <input type="checkbox" id="auto-start-break" checked>
+                        </div>
+                        <div class="setting-item">
+                            <label for="sound">提示音</label>
+                            <input type="checkbox" id="sound" checked>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- 作业登记本区域 -->
+                <section id="task-section" class="app-section">
+                    <div class="glass-container task-panel">
+                        <h3><i class="fa fa-book"></i> 作业登记本</h3>
+                        <div class="task-form">
+                            <input type="text" id="task-input" placeholder="输入你的任务..." maxlength="50">
+                            <button id="add-task-btn" class="control-btn primary small">添加</button>
+                        </div>
+                        <div class="task-filters">
+                            <button class="filter-btn active" data-filter="all">全部</button>
+                            <button class="filter-btn" data-filter="active">进行中</button>
+                            <button class="filter-btn" data-filter="completed">已完成</button>
+                        </div>
+                        <div class="task-actions-bar">
+                            <div class="task-stats">
+                                <span class="task-count">总计: <span id="total-tasks">0</span></span>
+                                <span class="task-completed">完成: <span id="completed-tasks">0</span></span>
+                            </div>
+                            <button id="batch-delete-btn" class="control-btn danger small" disabled>
+                                <i class="fa fa-trash"></i> 批量删除 (0)
+                            </button>
+                        </div>
+
+                        <ul id="task-list" class="task-list">
+                            <!-- 任务列表将通过JavaScript动态生成 -->
+                            <li class="empty-state">
+                                <i class="fa fa-list-ul"></i>
+                                <p>暂无任务，添加一个开始吧！</p>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </main>
+            
+            <!-- 底部导航栏 -->
+            <div class="bottom-nav">
+                <button class="nav-item active" data-target="timer-section">
+                    <i class="fa fa-clock-o"></i>
+                    <span>番茄钟</span>
+                </button>
+                <button class="nav-item" data-target="task-section">
+                    <i class="fa fa-book"></i>
+                    <span>作业登记</span>
+                </button>
+                <button class="nav-item" data-target="settings-section">
+                    <i class="fa fa-cog"></i>
+                    <span>设置</span>
+                </button>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
